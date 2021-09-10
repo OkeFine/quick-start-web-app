@@ -1,0 +1,37 @@
+module.exports = {
+  env: {
+    browser: true,
+    es6: true,
+  },
+  extends: ['airbnb-base'],
+  plugins: ['jest'],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
+  rules: {
+    'array-callback-return': 0,
+    'func-names': 0,
+    'lines-around-directive': 0,
+    'comma-dangle': 0,
+    'eol-last': 0,
+    'global-require': 0,
+    'no-console': 0,
+    'no-plusplus': 'off',
+    'space-before-function-parent': 0,
+    'import/no-named-as-default': 0,
+    'import/no-unresolved': 0,
+    'consistent-return': 0,
+    'import/named': 0,
+    'no-param-reassign': 0,
+    'import/no-default-export': 'off',
+    'arrow-parens': [2, 'as-needed'],
+    'no-unused-vars': 2,
+    'arrow-body-style': 2,
+    'no-shadow': 0,
+  },
+};

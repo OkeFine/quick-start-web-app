@@ -1,0 +1,37 @@
+{
+  "name": "career-be",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Quang Nguyen",
+  "license": "MIT",
+  "scripts": {
+    "start": "NODE_ENV=production  nodemon --exec babel-node index.js",
+    "dev": "NODE_ENV=development nodemon --exec babel-node index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.15.4",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "nodemon": "^2.0.12"
+  }
+}

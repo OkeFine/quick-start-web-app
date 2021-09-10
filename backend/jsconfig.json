@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@middleware": ["./middlewares"],
+      "@helper": ["./helpers"],
+      "@models": ["./db/models"]
+    }
+  }
+}
