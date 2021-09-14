@@ -1,9 +1,10 @@
+// @ts-nocheck
 import express from 'express';
 import programRouter from './program.router';
 
-const routers = express.Router();
+const router = express.Router();
 
 // define routes
-routers.use('/program', programRouter);
+router.use('/program', programRouter);
 
-module.exports = routers;
+export default router;

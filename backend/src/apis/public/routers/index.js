@@ -1,9 +1,9 @@
 import express from 'express';
-import programRouter from './program.router';
+import userRouter from './user.router';
 
-const routers = express.Router();
+const router = express.Router();
 
 // define routes
-routers.use('/program', programRouter);
+router.use('/user', userRouter);
 
-module.exports = routers;
+export default router;

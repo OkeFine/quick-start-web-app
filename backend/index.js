@@ -3,9 +3,10 @@ import path from 'path';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
-import { handleError, ErrorHandler } from './src/utils/errorHelpers';
+import { handleError, ValidError } from './src/utils/errorHelpers';
 import apiPublicRouter from './src/apis/public/routers';
 import apiPrivateRouter from './src/apis/private/routers';
+import verifyToken from './src/middlewares/auth';
 
 dotenv.config();
 
@@ -25,11 +26,26 @@ app.use(
 app.use('/', apiPublicRouter);
 
 // Private routes
-app.use('/private', apiPrivateRouter);
+app.use('/private', [verifyToken], apiPrivateRouter);
 
 // default route
 app.use('/', () => {
-  throw new ErrorHandler(404, 'NOT FOUND!');
+  throw new ValidError(404, 'NOT FOUND!');
+});
+
+// Error handler for Joi
+app.use((err, req, res, next) => {
+  if (err && err.error && err.error.isJoi) {
+    // we had a joi error, let's return a custom 400 json response
+    const statusCode = 400;
+    res.status(statusCode).json({
+      type: err.type, // will be "query" here, but could be "headers", "body", or "params"
+      message: err.error.toString()
+    });
+  } else {
+    // pass on to another error handler
+    next(err);
+  }
 });
 
 // Error handler
@@ -46,7 +62,7 @@ const runProdOptions = {
 
 console.log('===> API server listen at port', process.env.PORT);
 console.log('process.env', process.env.NODE_ENV);
-if (process.env === 'production') {
+if (process.env.NODE_ENV === 'production') {
   app.listen(runProdOptions, () => {
     console.log('server runing prod mode', process.env.PORT || 8080);
   });

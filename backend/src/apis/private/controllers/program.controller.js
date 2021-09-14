@@ -24,4 +24,4 @@ class programController {
   }
 }
 
-module.exports = programController;
+export default programController;

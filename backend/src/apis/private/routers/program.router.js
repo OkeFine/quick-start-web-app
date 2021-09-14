@@ -10,4 +10,4 @@ programRouter.delete('/:id', async (req, res, next) => {
   programController.delete(req, res, next);
 });
 
-module.exports = programRouter;
+export default programRouter;
