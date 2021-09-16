@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, MouseEvent } from 'react';
 import styled from 'styled-components';
 
 const SButton = styled.button`
@@ -10,18 +10,28 @@ const SButton = styled.button`
   margin: 0;
   border: none;
   color: #ffffff;
-  cursor: pointer;
+  &:hover {
+    background: #ccc;
+  }
 `;
 
 type TProps = {
   children: ReactNode | string;
   className?: string;
-  type: 'button' | 'submit' | 'reset' | undefined;
+  type?: 'button' | 'submit' | 'reset';
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  ariaLabel: string;
 };
 
-export default function Button({ className, children, type = 'button' }: TProps) {
+export default function Button({
+  className,
+  children,
+  type = 'button',
+  ariaLabel,
+  onClick,
+}: TProps) {
   return (
-    <SButton type={type} className={className}>
+    <SButton onClick={onClick} aria-label={ariaLabel} type={type} className={className}>
       {children}
     </SButton>
   );

@@ -21,14 +21,20 @@ const SMainContent = styled.div`
   padding: 10px;
 `;
 
-export default function MainLayout({ children }: { children: ReactNode }) {
+export default function MainLayout({
+  children,
+  handleLogout,
+}: {
+  children: ReactNode;
+  handleLogout: () => void;
+}) {
   return (
     <SWrapper>
       <Container>
         <Header />
         <SBody>
           <SNav>
-            <Navigation menu={MAIN_MENU} />
+            <Navigation handleLogout={handleLogout} menu={MAIN_MENU} />
           </SNav>
           <SMainContent>{children}</SMainContent>
         </SBody>

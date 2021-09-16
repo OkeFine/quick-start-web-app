@@ -1,7 +1,9 @@
-import { FormEvent } from 'react';
-import { Button } from '../../components';
 import styled from 'styled-components';
+import { Formik, Field } from 'formik';
+import { Button } from '../../components';
 import { useHistory } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { loginAsync, selectAuth } from '../../app/auth/authSlice';
 
 const SWrapper = styled.div`
   text-align: center;
@@ -52,28 +54,40 @@ const SLoginButton = styled(Button)`
 
 export default function LoginView() {
   const history = useHistory();
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO: dispatch action to login, and redirect to dashboard
+  const dispatch = useAppDispatch();
+  const auth = useAppSelector(selectAuth);
+
+  if (auth.status === 'idle' && auth.token && auth.user) {
     history.push('/');
-  };
+  }
+
   return (
     <SWrapper>
       <h1>Welcome</h1>
-      <SOutline>Fill in any word and submit to login</SOutline>
-      <SForm>
-        <form onSubmit={handleSubmit}>
-          <SField>
-            <label>Your Email</label>
-            <input type="email" placeholder="Email" />
-          </SField>
-          <SField>
-            <label>Password</label>
-            <input type="password" placeholder="Password" />
-          </SField>
-          <SLoginButton type="submit">Login</SLoginButton>
-        </form>
-      </SForm>
+      <SOutline>admin@example.com / 123456</SOutline>
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={async values => {
+          dispatch(loginAsync(values));
+        }}>
+        {props => (
+          <form onSubmit={props.handleSubmit}>
+            <SForm>
+              <SField>
+                <label>Your Email</label>
+                <Field name="email" type="email" />
+              </SField>
+              <SField>
+                <label>Password</label>
+                <Field name="password" type="password" />
+              </SField>
+              <SLoginButton ariaLabel="Login" type="submit">
+                Login
+              </SLoginButton>
+            </SForm>
+          </form>
+        )}
+      </Formik>
     </SWrapper>
   );
 }

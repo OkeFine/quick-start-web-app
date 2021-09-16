@@ -9,11 +9,12 @@ function verifyToken(req, res, next) {
       throw new ValidError(403, 'No token provided');
     }
 
-    jwt.verify(token, process.env.APP_SECRET, (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         throw new ValidError(401, 'Unauthorized');
       }
-      req.userId = decoded.id;
+      req.decoded = decoded;
+      req.token = token;
       next();
     });
   } catch (err) {
