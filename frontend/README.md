@@ -1,6 +1,30 @@
+## Structure
+
+    - src/
+    --- app (redux store, api services)
+    --- components (reuseable dumb components)
+    --- hooks (custom hooks)
+    --- layouts (layout templates)
+    --- Routes (define private/public routes)
+    --- utils (helper functions, contansts...)
+    --- views (views / smart components)
+
+## Libraries
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
+### Another added libraries:
+
+1. [axios](https://github.com/axios/axios)
+2. [react-router-dom](https://reactrouter.com/web/guides/quick-start)
+3. [styled-components](https://styled-components.com/), you can use CSS module by default but I recommend we use `styled-components`
+4. [formik](https://formik.org/), build the form in react
+
+Depend on your design, you can build your UI by yourself or use the UI libraries, I would like to suggest the [Material-UI](https://mui.com/getting-started/usage/)
+
 ## Available Scripts
+
+Before running the app, you need to create `.env` file, you may clone from `.env.sample`
 
 In the project directory, you can run:
 
